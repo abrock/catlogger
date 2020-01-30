@@ -7,6 +7,9 @@
 #include <cmath>
 #include <vector>
 #include <map>
+#include <mutex>
+#include <chrono>
+#include <iomanip>
 
 namespace clog {
 
@@ -40,9 +43,21 @@ private:
     std::vector<std::tuple<std::string, int32_t, std::string> > messages;
 
     /**
-     * @brief streams is a collection of std::ostream-type objects. All recorded messages are pushed to all those objects.
+     * @brief listeners is a collection of std::ostream-type objects. All recorded messages are pushed to all those objects.
      */
-    std::vector<std::ostream*> streams;
+    std::vector<std::ostream*> listeners;
+
+    /**
+     * @brief tmp_listeners is a temporary collection of std::ostream-type objects. All recorded messages are pushed to all those objects.
+     * The streams may be deleted using @ref clearTmpStreams.
+     */
+    std::vector<std::ostream*> tmp_listeners;
+
+    std::mutex m;
+
+    bool log_timestamps = false;
+
+    std::string current_time;
 
 public:
     // Compilers check accessibility before deleted status.
@@ -53,6 +68,8 @@ public:
     // he is attempting to do.
     Logger(Logger const&)          = delete;
     void operator=(Logger const&)  = delete;
+
+    void clearTmpListeners();
 
     /**
      * @brief log Log a message.
@@ -90,6 +107,11 @@ public:
     static void print(std::ostream &out, std::string const& cat, int32_t const level, std::string const& message);
 
     void addListener(std::ostream& out);
+    void addTmpListener(std::ostream& out);
+
+    void logTimestamps(bool log = true);
+
+    static std::string getTime();
 };
 
 } // namespace cl
