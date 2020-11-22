@@ -19,7 +19,9 @@ Logger &Logger::getInstance()
     return instance;
 }
 
-Logger::Logger() {}
+Logger::Logger() {
+     start_time = std::chrono::high_resolution_clock::now();
+}
 
 void Logger::clearTmpListeners() {
     tmp_listeners.clear();
@@ -112,6 +114,10 @@ std::string Logger::getTime() {
     oss << '.' << std::setfill('0') << std::setw(3) << ms.count();
 
     return oss.str();
+}
+
+double Logger::timeSinceStart() {
+    return std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now() - getInstance().start_time).count();
 }
 
 template<class T>

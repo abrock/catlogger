@@ -59,6 +59,11 @@ private:
 
     std::string current_time;
 
+    /**
+     * @brief start_time is the time of construction
+     */
+    std::chrono::high_resolution_clock::time_point start_time;
+
 public:
     // Compilers check accessibility before deleted status.
     // If the deleted methods were private the error message
@@ -112,6 +117,12 @@ public:
     void logTimestamps(bool log = true);
 
     static std::string getTime();
+
+    /**
+     * @brief timeSinceStart returns the time in seconds since the construction of the singleton.
+     * @return
+     */
+    static double timeSinceStart();
 };
 
 } // namespace cl
