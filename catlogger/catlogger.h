@@ -116,6 +116,10 @@ public:
 
     void logTimestamps(bool log = true);
 
+    /**
+     * @brief getTime formats the current time as HH:MM:SS where HH = hours (0-23), MM = minutes and SS = seconds with millisecond (xx.xxxx)
+     * @return
+     */
     static std::string getTime();
 
     /**
