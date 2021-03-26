@@ -64,6 +64,11 @@ private:
      */
     std::chrono::high_resolution_clock::time_point start_time;
 
+    /**
+     * @brief enabled if this is set to false via the disable() method all messages will be immediately discarded without printing or storing.
+     */
+    bool enabled = true;
+
 public:
     // Compilers check accessibility before deleted status.
     // If the deleted methods were private the error message
@@ -127,6 +132,16 @@ public:
      * @return
      */
     static double timeSinceStart();
+
+    /**
+     * @brief enable enables logging.
+     */
+    static void enable();
+
+    /**
+     * @brief disable disables logging.
+     */
+    static void disable();
 };
 
 } // namespace cl

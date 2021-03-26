@@ -28,6 +28,9 @@ void Logger::clearTmpListeners() {
 }
 
 void Logger::log(const std::string &cat, const int32_t level, const std::string &message) {
+    if (!enabled) {
+        return;
+    }
     m.lock();
     std::string msg = rtrim(message);
     if (!msg.empty()) {
@@ -118,6 +121,14 @@ std::string Logger::getTime() {
 
 double Logger::timeSinceStart() {
     return std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now() - getInstance().start_time).count();
+}
+
+void Logger::enable() {
+    getInstance().enabled = true;
+}
+
+void Logger::disable() {
+    getInstance().enabled = false;
 }
 
 template<class T>
