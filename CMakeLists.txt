@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 2.6)
 project(catlogger)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pthread")
+set(CMAKE_CXX_STANDARD 20)
+find_package(Threads REQUIRED)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pthread")
 
 # Set variables
 include(${CMAKE_SOURCE_DIR}/cmake/SetEnv.cmake)

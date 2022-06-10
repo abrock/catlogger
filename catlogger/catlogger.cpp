@@ -1,5 +1,6 @@
 #include "catlogger.h"
 
+namespace catlogger {
 namespace clog {
 
 namespace  {
@@ -147,3 +148,4 @@ int L::Logbuf::sync() {
 }
 
 } // namespace clog
+} // namespace catlogger

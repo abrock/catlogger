@@ -11,6 +11,7 @@
 #include <chrono>
 #include <iomanip>
 
+namespace catlogger {
 namespace clog {
 
 class L : public std::ostream {
@@ -144,6 +145,7 @@ public:
     static void disable();
 };
 
-} // namespace cl
+} // namespace clog
+} // namespace catlogger
 
 #endif // CATLOGGER_H
